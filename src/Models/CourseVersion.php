@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use IncadevUns\CoreDomain\Enums\CourseVersionStatus;
 use IncadevUns\CoreDomain\Traits\CanBeAudited;
-use IncadevUns\CoreDomain\Traits\CanBeRated;
 
 class CourseVersion extends Model
 {
-    use CanBeAudited, CanBeRated;
+    use CanBeAudited;
 
     protected $fillable = [
         'course_id',

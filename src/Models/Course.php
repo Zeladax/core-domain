@@ -5,11 +5,10 @@ namespace IncadevUns\CoreDomain\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use IncadevUns\CoreDomain\Traits\CanBeAudited;
-use IncadevUns\CoreDomain\Traits\CanBeRated;
 
 class Course extends Model
 {
-    use CanBeAudited, CanBeRated;
+    use CanBeAudited;
 
     protected $fillable = [
         'name',
