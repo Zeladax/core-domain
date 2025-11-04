@@ -47,6 +47,8 @@ class Audit extends Model
         'auditor_id',
         'audit_date',
         'summary',
+        'recommendation',
+        'path_report',
         'status',
         'auditable_id',
         'auditable_type',

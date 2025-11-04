@@ -13,6 +13,8 @@ return new class extends Migration
             $table->foreignId('auditor_id')->nullable()->constrained('users')->onDelete('set null');
             $table->date('audit_date');
             $table->text('summary')->nullable();
+            $table->text('recommendation')->nullable();
+            $table->string('path_report')->nullable();
             $table->string('status')->default('pending')->index();
             $table->morphs('auditable');
             $table->timestamps();
