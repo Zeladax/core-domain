@@ -393,6 +393,34 @@ class PermissionsSeeder extends Seeder
         $allPermissions = array_merge($allPermissions, $supportPermissions);
 
         // ========================================
+        // PERMISOS DE SEGURIDAD
+        // ========================================
+        $securityPermissions = [
+            // Permisos básicos (usuarios normales - solo su propia info)
+            'security-dashboard.view',
+            'sessions.view',
+            'sessions.terminate',
+            'tokens.view',
+            'tokens.revoke',
+            'security-events.view',
+
+            // Permisos administrativos (rol security - info de TODOS)
+            'security-dashboard.view-any',
+            'sessions.view-any',
+            'sessions.terminate-any',
+            'tokens.view-any',
+            'tokens.revoke-any',
+            'security-events.view-any',
+            'security-events.export',
+            'security-alerts.view',
+            'security-alerts.resolve',
+            'security-users.view',
+            'security-users.block',
+            'security-users.unblock',
+        ];
+        $allPermissions = array_merge($allPermissions, $securityPermissions);
+
+        // ========================================
         // PERMISOS DE FOROS
         // ========================================
         $forumPermissions = [
