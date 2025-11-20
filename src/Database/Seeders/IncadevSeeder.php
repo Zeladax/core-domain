@@ -14,6 +14,7 @@ class IncadevSeeder extends Seeder
             TechnologySeeder::class,
             AdministrativeSeeder::class,
             AcademicSeeder::class,
+            SupportSeeder::class,
         ]);
     }
 }
