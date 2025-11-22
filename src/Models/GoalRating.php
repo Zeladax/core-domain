@@ -1,6 +1,6 @@
 <?php
 
-namespace Incadev\CoreDomain\Models;
+namespace IncadevUns\CoreDomain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
