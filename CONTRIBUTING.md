@@ -45,8 +45,21 @@ composer test
 composer run build
 ```
 
-Si alguno de estos comandos genera errores, revisa cuidadosamente los
-mensajes y corrige antes de enviar tu contribución.
+### En caso de errores durante la validación
+
+Si alguno de estos comandos falla:
+
+1. Revisa el mensaje de error para identificar el comando que falló.
+2. Ejecuta los siguientes comandos de recuperación:
+
+    ``` bash
+    composer clear-cache
+    composer dump-autoload
+    ```
+
+3. Una vez completados, **vuelve a intentar ejecutar** el o los comandos que fallaron.
+
+Si tras repetir el proceso los errores continúan, revisa con más detalle el mensaje de error o consulta al equipo del proyecto antes de enviar tu contribución.
 
 ## Cómo contribuir
 
