@@ -15,6 +15,7 @@ class IncadevSeeder extends Seeder
             AdministrativeSeeder::class,
             AcademicSeeder::class,
             SupportSeeder::class,
+            KpiGoalsSeeder::class,
         ]);
     }
 }
