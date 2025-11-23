@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('iniciatives', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('plan_id')->constrained('strategic_plans')->nullOnDelete();
+            $table->foreignId('plan_id')->nullable()->constrained('strategic_plans')->nullOnDelete();
             $table->string('summary');
-            $table->foreignId('user_id')->constrained('users')->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('status');
             $table->date('start_date');
             $table->date('end_date');

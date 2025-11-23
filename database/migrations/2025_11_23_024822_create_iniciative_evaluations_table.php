@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('iniciative_evaluations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('iniciative_id')->constrained('iniciatives')->nullOnDelete();
-            $table->foreignId('evaluator_user')->constrained('users')->nullOnDelete();
+            $table->foreignId('iniciative_id')->nullable()->constrained('iniciatives')->nullOnDelete();
+            $table->foreignId('evaluator_user')->nullable()->constrained('users')->nullOnDelete();
             $table->string('summary');
             $table->decimal('score', 5, 2);
             $table->foreignId('document_id')->nullable()->constrained('strategic_documents')->nullOnDelete();

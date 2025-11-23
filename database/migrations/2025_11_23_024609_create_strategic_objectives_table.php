@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->decimal('goal_value');
-            $table->foreignId('user_id')->constrained('users')->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->bigInteger('weight')->default(0);
             $table->jsonb('kpis')->nullable();
             $table->timestamps();
