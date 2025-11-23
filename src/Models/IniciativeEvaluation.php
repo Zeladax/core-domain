@@ -31,6 +31,7 @@ class IniciativeEvaluation extends Model
     public function evaluator()
     {
         $userModel = config('auth.providers.users.model', \App\Models\User::class);
+
         return $this->belongsTo($userModel, 'evaluator_user');
     }
 
