@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('metrics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->onDelete('cascade');
+            // $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->onDelete('cascade');
             $table->foreignId('post_id')->nullable()->constrained('posts')->onDelete('cascade');
             $table->string('platform'); // 'facebook' o 'instagram'
             $table->integer('views')->default(0);

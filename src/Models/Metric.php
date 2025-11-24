@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Metric extends Model
 {
     protected $fillable = [
-        'campaign_id',
+        // 'campaign_id',
         'post_id',
         'platform',
         'meta_post_id',
@@ -56,13 +56,13 @@ class Metric extends Model
         'updated_at' => 'datetime',
     ];
 
-    /**
-     * Relationship with campaign.
-     */
-    public function campaign(): BelongsTo
-    {
-        return $this->belongsTo(Campaign::class);
-    }
+    // /**
+    //  * Relationship with campaign.
+    //  */
+    // public function campaign(): BelongsTo
+    // {
+    //     return $this->belongsTo(Campaign::class);
+    // }
 
     /**
      * Relationship with post.
