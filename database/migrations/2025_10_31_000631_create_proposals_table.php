@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content')->nullable();
+            $table->text('description')->nullable();
+            $table->string('area');
+            $table->string('priority');
+            $table->string('status');
+            $table->string('target_audience');
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

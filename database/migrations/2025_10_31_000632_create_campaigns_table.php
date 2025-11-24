@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->nullable()->constrained('courses')->nullOnDelete();
-            $table->foreignId('proposal_id')->nullable()->constrained('proposals')->nullOnDelete();
+            $table->foreignId('proposal_id')->nullable()->constrained('proposals')->onDelete('cascade');
+            $table->foreignId('course_version_id')->nullable()->constrained('course_versions')->onDelete('cascade');
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->text('objective')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

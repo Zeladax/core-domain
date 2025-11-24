@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('metrics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('campaign_id')->constrained('campaigns')->onDelete('cascade');
-            $table->integer('views')->default(0);
+            $table->foreignId('post_id')->nullable()->constrained('posts')->onDelete('cascade');
+            $table->integer('messages_received')->default(0);
+            $table->integer('pre_registrations')->default(0);
+            $table->decimal('intention_percentage', 5, 2)->default(0);
+            $table->integer('total_reach')->default(0);
+            $table->integer('total_interactions')->default(0);
+            $table->decimal('ctr_percentage', 5, 2)->default(0);
             $table->integer('likes')->default(0);
             $table->integer('comments')->default(0);
-            $table->integer('shares')->default(0);
+            $table->integer('private_messages')->default(0);
+            $table->integer('expected_enrollments')->default(0);
+            $table->decimal('cpa_cost', 10, 2)->default(0);
             $table->timestamps();
         });
     }

@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('campaign_id');
-            // post id from meta
-            $table->string('meta_post_id')->nullable()->unique();
+            $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->onDelete('cascade');
             $table->string('title');
-            $table->string('platform'); // Facebook, TikTok, etc.
+            $table->string('platform');
             $table->text('content')->nullable();
-            $table->string('image_url')->nullable();
+            $table->string('content_type');
+            $table->string('image_path')->nullable();
+            $table->string('link_url')->nullable();
+            $table->string('status');
+            $table->timestamp('scheduled_at')->nullable();
+            $table->timestamp('published_at')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
-            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
         });
     }
 
