@@ -10,12 +10,19 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('offer_id')->constrained('offers')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('offer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('applicant_id')->constrained()->onDelete('cascade');
             $table->string('cv_path');
-            $table->string('status')->default('pending')->index();
+            $table->enum('status', ['pending', 'under_review', 'shortlisted', 'rejected', 'hired', 'withdrawn'])->default('pending');
             $table->timestamps();
-            $table->unique(['offer_id', 'user_id']);
+
+            // Un applicant solo puede postular una vez por oferta
+            $table->unique(['offer_id', 'applicant_id']);
+
+            // Índices para búsquedas eficientes
+            $table->index(['offer_id', 'status']);
+            $table->index('status');
+            $table->index('created_at');
         });
     }
 

@@ -9,24 +9,24 @@ use IncadevUns\CoreDomain\Enums\ApplicationStatus;
 /**
  * @property int $id
  * @property int $offer_id
- * @property int $user_id
+ * @property int $applicant_id
  * @property string $cv_path
  * @property ApplicationStatus $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \IncadevUns\CoreDomain\Models\Offer $offer
- * @property-read \Illuminate\Foundation\Auth\User $user
+ * @property-read \IncadevUns\CoreDomain\Models\Applicant $applicant
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereApplicantId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereCvPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereOfferId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Application whereUserId($value)
  *
  * @mixin \Eloquent
  */
@@ -34,7 +34,7 @@ class Application extends Model
 {
     protected $fillable = [
         'offer_id',
-        'user_id',
+        'applicant_id',
         'cv_path',
         'status',
     ];
@@ -48,8 +48,8 @@ class Application extends Model
         return $this->belongsTo(Offer::class);
     }
 
-    public function user(): BelongsTo
+    public function applicant(): BelongsTo
     {
-        return $this->belongsTo(config('auth.providers.users.model', 'App\Models\User'));
+        return $this->belongsTo(Applicant::class);
     }
 }

@@ -2,11 +2,10 @@
 
 namespace IncadevUns\CoreDomain\Enums;
 
-enum StaffPaymentType: string
+enum OfferStatus: string
 {
-    case Monthly = 'monthly';
-    case Weekly = 'weekly';
-    case PerCourse = 'per_course';
+    case Active = 'active';
+    case Closed = 'closed';
 
     public static function values(): array
     {

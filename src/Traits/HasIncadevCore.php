@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use IncadevUns\CoreDomain\Models\Application;
 use IncadevUns\CoreDomain\Models\Appointment;
 use IncadevUns\CoreDomain\Models\Audit;
 use IncadevUns\CoreDomain\Models\AuditAction;
@@ -18,7 +17,6 @@ use IncadevUns\CoreDomain\Models\Conversation;
 use IncadevUns\CoreDomain\Models\Enrollment;
 use IncadevUns\CoreDomain\Models\Group;
 use IncadevUns\CoreDomain\Models\Message;
-use IncadevUns\CoreDomain\Models\Offer;
 use IncadevUns\CoreDomain\Models\StudentProfile;
 use IncadevUns\CoreDomain\Models\SupportProfile;
 use IncadevUns\CoreDomain\Models\SurveyResponse;
@@ -94,21 +92,6 @@ trait HasIncadevCore
     public function contracts(): HasMany
     {
         return $this->hasMany(Contract::class);
-    }
-
-    public function applications(): HasMany
-    {
-        return $this->hasMany(Application::class);
-    }
-
-    public function offersAppliedTo(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Offer::class,
-            'applications',
-            'user_id',
-            'offer_id'
-        )->withPivot('cv_path', 'status', 'created_at');
     }
 
     public function tickets(): HasMany
