@@ -4,16 +4,17 @@ namespace IncadevUns\CoreDomain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Post Model
  *
  * Represents a social media post for a campaign.
- * Each post belongs to a campaign and has one metric associated.
+ * Each post belongs to a campaign and can have multiple metrics.
  *
  * @property int $id
- * @property int $campaign_id
+ * @property int|null $campaign_id
+ * @property string|null $meta_post_id
  * @property string $title
  * @property string $platform
  * @property string|null $content
@@ -23,16 +24,17 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $scheduled_at
  * @property \Illuminate\Support\Carbon|null $published_at
- * @property int $created_by
+ * @property int|null $created_by
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
- * @property-read \IncadevUns\CoreDomain\Models\Campaign $campaign
- * @property-read \IncadevUns\CoreDomain\Models\Metric $metric
+ * @property-read \IncadevUns\CoreDomain\Models\Campaign|null $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \IncadevUns\CoreDomain\Models\Metric> $metrics
  */
 class Post extends Model
 {
     protected $fillable = [
         'campaign_id',
+        'meta_post_id',
         'title',
         'platform',
         'content',
@@ -62,12 +64,12 @@ class Post extends Model
     }
 
     /**
-     * Relationship with metric.
-     * Each post has one metric associated.
+     * Relationship with metrics.
+     * Each post can have multiple metrics.
      */
-    public function metric(): HasOne
+    public function metrics(): HasMany
     {
-        return $this->hasOne(Metric::class);
+        return $this->hasMany(Metric::class);
     }
 
     /**

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->onDelete('cascade');
+            $table->string('meta_post_id')->nullable()->unique();
             $table->string('title');
             $table->string('platform');
             $table->text('content')->nullable();

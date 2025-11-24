@@ -8,57 +8,107 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * Metric Model
  *
- * Represents metrics for a post, including various engagement and performance indicators.
- * Each metric belongs to a post.
+ * Represents metrics for campaigns and posts from Facebook and Instagram.
+ * Can store consolidated campaign metrics or individual post metrics.
  *
  * @property int $id
- * @property int $post_id
- * @property int $messages_received
- * @property int $pre_registrations
- * @property float $intention_percentage
- * @property int $total_reach
- * @property int $total_interactions
- * @property float $ctr_percentage
+ * @property int|null $campaign_id
+ * @property int|null $post_id
+ * @property string $platform
+ * @property string|null $meta_post_id
+ * @property int $views
  * @property int $likes
  * @property int $comments
- * @property int $private_messages
- * @property int $expected_enrollments
- * @property float $cpa_cost
+ * @property int $shares
+ * @property int $engagement
+ * @property int $reach
+ * @property int $impressions
+ * @property int $saves
+ * @property \Illuminate\Support\Carbon $metric_date
+ * @property string $metric_type
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
- * @property-read \IncadevUns\CoreDomain\Models\Post $post
+ * @property-read \IncadevUns\CoreDomain\Models\Campaign|null $campaign
+ * @property-read \IncadevUns\CoreDomain\Models\Post|null $post
  */
 class Metric extends Model
 {
     protected $fillable = [
+        'campaign_id',
         'post_id',
-        'messages_received',
-        'pre_registrations',
-        'intention_percentage',
-        'total_reach',
-        'total_interactions',
-        'ctr_percentage',
+        'platform',
+        'meta_post_id',
+        'views',
         'likes',
         'comments',
-        'private_messages',
-        'expected_enrollments',
-        'cpa_cost',
+        'shares',
+        'engagement',
+        'reach',
+        'impressions',
+        'saves',
+        'metric_date',
+        'metric_type',
     ];
 
     protected $casts = [
-        'intention_percentage' => 'decimal:2',
-        'ctr_percentage' => 'decimal:2',
-        'cpa_cost' => 'decimal:2',
+        'metric_date' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
     /**
+     * Relationship with campaign.
+     */
+    public function campaign(): BelongsTo
+    {
+        return $this->belongsTo(Campaign::class);
+    }
+
+    /**
      * Relationship with post.
-     * Each metric belongs to a post.
      */
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
+    }
+
+    /**
+     * Scope for campaign metrics.
+     */
+    public function scopeCampaignMetrics($query)
+    {
+        return $query->whereNull('post_id');
+    }
+
+    /**
+     * Scope for post metrics.
+     */
+    public function scopePostMetrics($query)
+    {
+        return $query->whereNotNull('post_id');
+    }
+
+    /**
+     * Scope by platform.
+     */
+    public function scopePlatform($query, $platform)
+    {
+        return $query->where('platform', $platform);
+    }
+
+    /**
+     * Scope by metric type.
+     */
+    public function scopeMetricType($query, $type)
+    {
+        return $query->where('metric_type', $type);
+    }
+
+    /**
+     * Calculate engagement automatically.
+     */
+    public function calculateEngagement()
+    {
+        return $this->likes + $this->comments + $this->shares + $this->saves;
     }
 }
